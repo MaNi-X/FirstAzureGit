@@ -1,0 +1,58 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+  },
+  "variables": {
+    "NetworkPrefix": "10.0.0.0/16",
+    "NetworkSubnet1Name": "LAN-1",
+    "NetworkSubnet1Prefix": "10.0.4.0/24",
+    "NetworkSubnet2Name": "LAN-2",
+    "NetworkSubnet2Prefix": "10.0.5.0/24",
+    "NetworkSubnet3Name": "DMZ-1",
+    "NetworkSubnet3Prefix": "10.0.6.0/24"
+  },
+  "resources": [
+    {
+      "name": "Network",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "Network"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('NetworkPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('NetworkSubnet1Name')]",
+            "properties": {
+              "addressPrefix": "[variables('NetworkSubnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[variables('NetworkSubnet2Name')]",
+            "properties": {
+              "addressPrefix": "[variables('NetworkSubnet2Prefix')]"
+            }
+          },
+          {
+            "name": "[variables('NetworkSubnet3Name')]",
+            "properties": {
+              "addressPrefix": "[variables('NetworkSubnet3Prefix')]"
+            }
+          }
+        ]
+      }
+    }
+    
+    
+  ],
+  "outputs": {
+  }
+}
